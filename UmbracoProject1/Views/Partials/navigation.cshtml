@@ -1,0 +1,40 @@
+﻿@inherits UmbracoViewPage
+
+@{
+    var home = Umbraco.AssignedContentItem.AncestorOrSelf<HomePage>();
+    var navigationItems = home.MainNavigation;
+}
+
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="@home.Url()">Start Bootstrap</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                @if (navigationItems != null && navigationItems.Any())
+                {
+                    foreach (var item in navigationItems)
+                    {
+                        var hasChilds = item.ChildLinks != null && item.ChildLinks.Any();
+                        if (hasChilds)
+                        {
+
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="@item.Link.Url" target="@item.Link.Target">@item.Title</a></li>
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</nav>@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
